@@ -1,7 +1,7 @@
 # Cyber Security
 
 ## My Information 
-- Nattachai Wongsrimeung
+- Name: Nattachai Wongsrimeung
 - Student ID: 0568604056XX-X 
 
 ## Expectations For This Course
