@@ -8,5 +8,10 @@
 - Getting Started With Git and Docker Commands
 - Using Commands Via The Command Line Rather Than The UI
 - Understand The Principles Of Reading Logs
-![PostgreSQL](https://shields.io)![GitHub](https://shields.io)
+
+## 🦾 Hard Skiils
+| Cloud                                                                                                                                        |
+|----------------------------------------------------------------------------------------------------------------------------------------------|
+| ![Railway](https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white)                                     |
+|----------------------------------------------------------------------------------------------------------------------------------------------|
 
