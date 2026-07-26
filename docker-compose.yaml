@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: 69-s3-db
+    ports:
+      - "54326:5432"
+    environment:
+      POSTGRES_USER: nattachai
+      POSTGRES_PASSWORD: JuniorG4me@PRM
+      POSTGRES_DB: nattachai
