@@ -9,7 +9,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-      - ./data-postgres:/var/lib/postgresql/data #ผูก Volume เพื่อเก็บข้อมูล database
+      - db-postgres:/var/lib/postgtresql/data
+      - ./data-postgres:/var/lib/postgresql/data #ผูก Volume เพื่อเก็บข้อมูล database แยกเป็นโฟล์เดอร์ใน localhost
   pgadmin:
     image: dpage/pgadmin4:9.16
     container_name: 69-s3-admin
@@ -20,7 +21,11 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD} # รหัสผ่านสำหรับใช้ Login เข้า pgAdmin
     depends_on: #เป็นการบอก Docker ว่าให้รัน Service db (PostgreSQL) ให้เสร็จก่อน ค่อยรัน pgadmin ตามมา
       - db
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin # ผูก Volume เพื่อเก็บการตั้งค่าของ pgAdmin
 
 #Define Using Systems in Volume
 volumes:
   data-postgres:
+  db-postgres:
+  pgadmin-data:
