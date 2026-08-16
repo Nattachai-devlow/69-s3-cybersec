@@ -3,4 +3,4 @@
 
 
 # Ignore Local Database/Volume data
-/postgres-data/
+/data-postgres/
