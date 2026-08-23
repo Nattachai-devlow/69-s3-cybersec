@@ -1,0 +1,41 @@
+### [login]
+POST http://localhost:8037/api/auth/local
+Content-Type: application/json
+
+{
+  "identifier": "",
+  "password": ""
+}
+
+### [register]
+POST http://localhost:8037/api/auth/local/register
+Content-Type: application/json
+
+{
+  "username" : "",
+  "email" : "",
+  "password" : ""
+}
+
+### [forgot password]
+POST http://localhost:8037/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email" : ""
+}
+
+### [reset password]
+POST http://localhost:8037/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "code" : "",
+  "password" : "",
+  "passwordConfirmation" : ""
+}
+
+###[profile & role]
+GET http://localhost:8037/api/users/me?populate=role
+Authorization: Bearer {{JWT}}
+
