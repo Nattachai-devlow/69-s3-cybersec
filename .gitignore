@@ -8,3 +8,6 @@
 
 # Ignore api-shoot.rest
 /api-shoot.rest
+
+# Ignore config/plugins.js folder
+/config
