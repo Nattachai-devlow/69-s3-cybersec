@@ -1,0 +1,10 @@
+# Ignore ENV variables
+
+.env
+
+# Ignore Local Database/Volume data
+
+/data-postgres/
+
+# Ignore api-shoot.rest
+/api-shoot.rest
