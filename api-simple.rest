@@ -1,41 +1,88 @@
-### [login]
-POST http://localhost:8037/api/auth/local
+## [admin]
+### POST admin/register-admin [register]
+POST http://127.0.0.1:8037/admin/register-admin
 Content-Type: application/json
 
 {
-  "identifier": "",
-  "password": ""
+  "firstname": " ",
+  "lastname": " ",
+  "email": " ",
+  "password": " "
 }
 
-### [register]
-POST http://localhost:8037/api/auth/local/register
+### POST admin/login [login]
+POST http://127.0.0.1:8037/admin/login
 Content-Type: application/json
 
 {
-  "username" : "",
-  "email" : "",
-  "password" : ""
+  "email": " ",
+  "password": " ",
+  "rememberMe": false
 }
 
-### [forgot password]
-POST http://localhost:8037/api/auth/forgot-password
+### status code 204 is pass
+### POST admin/forgot-password [forgot password]
+POST http://127.0.0.1:8037/admin/forgot-password
 Content-Type: application/json
 
 {
-  "email" : ""
+  "email": " "
 }
 
-### [reset password]
-POST http://localhost:8037/api/auth/reset-password
+### POST admin/reset-password [reset password]
+POST http://127.0.0.1:8037/admin/reset-password
 Content-Type: application/json
 
 {
-  "code" : "",
-  "password" : "",
-  "passwordConfirmation" : ""
+  "password": " ",
+  "resetPasswordToken": " "
 }
 
-###[profile & role]
-GET http://localhost:8037/api/users/me?populate=role
-Authorization: Bearer {{JWT}}
+### GET admin/users/me [profile & role] use token
+GET http://127.0.0.1:8037/admin/users/me
+Authorization: Bearer {{Token-JWT}}
 
+##=======================================================##
+
+## user/customer
+
+###POST api/auth/local [login]
+POST http://127.0.0.1:8037/api/auth/local
+Content-Type: application/json
+
+{
+  "identifier": " ",
+  "password": " "
+}
+
+### POST api/auth/local/register [register]
+POST http://127.0.0.1:8037/api/auth/local/register
+Content-Type: application/json
+
+{
+  "username" : " ",
+  "email" : " ",
+  "password" : " "
+}
+
+### POST api/auth/forgot-password [forgot password]
+POST http://127.0.0.1:8037/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email" : " "
+}
+
+### POST api/auth/reset-password [reset password]
+POST http://127.0.0.1:8037/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "code" : " ",
+  "password" : " ",
+  "passwordConfirmation" : " "
+}
+
+### GET api/users/me [get profile]
+GET http://127.0.0.1:8037/api/users/me
+Authorization: Bearer {{Token-JWT}}
