@@ -1,7 +1,11 @@
 # Ignore ENV variables
 
 .env
-secrets.env
+secret.env
+.vscode/settings.json
+*.pem
+*.key
+
 # Ignore Local Database/Volume data
 
 /data-postgres/
@@ -11,3 +15,8 @@ secrets.env
 
 # Ignore config/plugins.js folder
 /config
+
+# Ignore user uploads & runtime logs
+/strapi-uploads/
+*.log
+.DS_Store
