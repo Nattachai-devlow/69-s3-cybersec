@@ -1,7 +1,7 @@
 # Ignore ENV variables
 
 .env
-
+secrets.env
 # Ignore Local Database/Volume data
 
 /data-postgres/
