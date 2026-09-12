@@ -1,0 +1,13 @@
+# Ignore ENV variables
+
+.env
+secret.env
+.vscode/settings.json
+
+# Ignore Local Database/Volume data
+
+/data-postgres/
+
+# Ignore user uploads
+
+/strapi-uploads/

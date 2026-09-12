@@ -1,0 +1,6 @@
+# Ignore ENV variables 
+.env
+
+
+# Ignore Local Database/Volume data
+/postgres-data/
