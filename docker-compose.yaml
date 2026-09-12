@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: 69-s3-db
+    ports:
+      - "127.0.0.1:${DATABASE_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 2s
+      retries: 3
+
+  pgadmin:
+    image: dpage/pgadmin4:9.16
+    container_name: 69-s3-admin
+    ports:
+      - "127.0.0.1:${PGADMIN_PORT}:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - db
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+  app:
+    image: prawee/strapi:latest
+    container_name: 69-s3-app
+    ports:
+      - "${APP_PORT}:5432"
+    # เช็คว่ามี module หรือยัง ถ้ายังไม่มีให้ yarn add ก่อนแล้วค่อย start
+    command: sh -c "test -d node_modules/@strapi/provider-email-nodemailer || yarn add @strapi/provider-email-nodemailer --ignore-engines && yarn start"
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_NAME=${POSTGRES_DB}
+      - DATABASE_HOST=${MY_LOCALHOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USERNAME=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./strapi-uploads:/opt/app/public/uploads
+      - ./config/plugins.js:/opt/app/config/plugins.js
+    restart: on-failure
+    depends_on:
+      - db
+      - mailhog
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: 69-s3-mailhog
+    ports:
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
+volumes:
+  pgadmin-data:
