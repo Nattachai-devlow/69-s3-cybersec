@@ -1,0 +1,21 @@
+services:
+  app:
+    image: prawee/strapi:1.1.0
+    container_name: 69-s3-app
+    ports:
+      - "${BIND_IP}:${APP_PORT}:1337"
+    environment:
+      - DATABASE_CLIENT=${DATABASE_CLIENT}
+      - DATABASE_NAME=${POSTGRES_DB}
+      - DATABASE_HOST=${MY_LOCALHOST}
+      - DATABASE_PORT=${DATABASE_PORT_APP}
+      - DATABASE_USERNAME=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - APP_KEYS=${APP_KEYS}
+      - API_TOKEN_SALT=${API_TOKEN_SALT}
+      - ADMIN_JWT_SECRET=${ADMIN_JWT_SECRET}
+      - TRANSFER_TOKEN_SALT=${TRANSFER_TOKEN_SALT}
+      - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - ./strapi-uploads:/opt/app/public/uploads
+    restart: on-failure
