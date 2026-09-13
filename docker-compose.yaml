@@ -70,6 +70,7 @@ services:
       - ./config/middlewares.js:/opt/app/config/middlewares.js
       - ./config/auth-rate-limit.js:/opt/app/middlewares/auth-rate-limit.js
       - ./config/audit-log.js:/opt/app/middlewares/audit-log.js
+      - ./src/index.js:/opt/app/src/index.js
       - ./logs:/opt/app/logs
     restart: on-failure
     depends_on:
