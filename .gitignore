@@ -2,7 +2,8 @@
 .env
 secret.env
 .vscode/settings.json
-
+config/
+api-shoot.rest
 
 # Ignore Local Database/Volume data
 /data-postgres/
