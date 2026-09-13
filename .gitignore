@@ -13,10 +13,12 @@ secret.env
 # Ignore api-shoot.rest
 /api-shoot.rest
 
-# Ignore config/plugins.js folder
-/config
-
 # Ignore user uploads & runtime logs
 /strapi-uploads/
+/logs/
 *.log
 .DS_Store
+
+# ===== Strapi config (self-hardening baseline ถูก commit เข้า repo แล้ว) =====
+# ยกเว้นไฟล์ที่เก็บ secret จริงไว้เฉพาะเครื่อง
+/config/servers.json
