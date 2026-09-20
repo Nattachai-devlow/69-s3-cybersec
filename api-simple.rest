@@ -1,89 +1,88 @@
-## 1. [admin] section
+## 1.[admin] section
 ### 1.1 POST admin/register-admin [register]
-POST http://127.0.0.1:8037/admin/register-admin
+POST {{baseUrl}}/admin/register-admin
 Content-Type: application/json
 
 {
-  "firstname": " ",
-  "lastname": " ",
-  "email": " ",
-  "password": " "
+  "firstname": "Nattachai",
+  "lastname": "Wongsrimueng",
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
 }
 
 ### 1.2 POST admin/login [login]
-POST http://127.0.0.1:8037/admin/login
+POST {{baseUrl}}/admin/login
 Content-Type: application/json
 
 {
-  "email": " ",
-  "password": " ",
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}",
   "rememberMe": false
 }
 
 ### status code 204 is pass
 ### 1.3 POST admin/forgot-password [forgot password]
-POST http://127.0.0.1:8037/admin/forgot-password
+POST {{baseUrl}}/admin/forgot-password
 Content-Type: application/json
 
 {
-  "email": " "
+  "email": "{{adminEmail}}"
 }
 
 ### 1.3.1 POST admin/reset-password [reset password]
-POST http://127.0.0.1:8037/admin/reset-password
+POST {{baseUrl}}/admin/reset-password
 Content-Type: application/json
 
 {
-  "password": " ",
-  "resetPasswordToken": " "
+  "password": "{{newPasswordAdmin}}",
+  "resetPasswordToken": "{{resetPasswordAdminToken}}"
 }
 
-### 1.4 GET admin/users/me [profile & role] use token
-GET http://127.0.0.1:8037/admin/users/me
-Authorization: Bearer {{Token-JWT}}
+### 1.4 GET admin/users/me [profile] use token
+GET {{baseUrl}}/admin/users/me
+Authorization: Bearer {{adminToken}}
+
 
 ##=======================================================##
-
 ## 2. [user] section
-
 ### 2.1 POST api/auth/local [login]
-POST http://127.0.0.1:8037/api/auth/local
+POST {{baseUrl}}/api/auth/local
 Content-Type: application/json
 
 {
-  "identifier": " ",
-  "password": " "
+  "identifier": "{{userEmail}}",
+  "password": "{{userPassword}}"
 }
 
 ### 2.2 POST api/auth/local/register [register]
-POST http://127.0.0.1:8037/api/auth/local/register
+POST {{baseUrl}}/api/auth/local/register
 Content-Type: application/json
 
 {
-  "username" : " ",
-  "email" : " ",
-  "password" : " "
+  "username" : "newuser",
+  "email" : "newemail@example.com",
+  "password" : "newpassword"
 }
 
 ### 2.3 POST api/auth/forgot-password [forgot password]
-POST http://127.0.0.1:8037/api/auth/forgot-password
+POST {{baseUrl}}/api/auth/forgot-password
 Content-Type: application/json
 
 {
-  "email" : " "
+  "email" : "{{userEmail}}"
 }
 
 ### 2.3.1 POST api/auth/reset-password [reset password]
-POST http://127.0.0.1:8037/api/auth/reset-password
+POST {{baseUrl}}/api/auth/reset-password
 Content-Type: application/json
 
 {
-  "code" : " ",
-  "password" : " ",
-  "passwordConfirmation" : " "
+  "code" : "{{resetPasswordUserToken}}",
+  "password" : "{{newPasswordUser}}",
+  "passwordConfirmation" : "{{newPasswordUser}}"
 }
 
 
 ### 2.4 GET api/users/me [get profile]
-GET http://127.0.0.1:8037/api/users/me
-Authorization: Bearer {{Token-JWT}}
+GET {{baseUrl}}/api/users/me
+Authorization: Bearer {{userToken}}
