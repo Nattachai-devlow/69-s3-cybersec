@@ -1,0 +1,17 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "baseUrl": "http://127.0.0.1:8037",
+      "adminEmail": "",
+      "adminPassword": "",
+      "adminToken": "",
+      "userEmail": "",
+      "userPassword": "",
+      "userToken": "",
+      "newPasswordAdmin": "",
+      "newPasswordUser": "",
+      "resetPasswordAdminToken": "",
+      "resetPasswordUserToken": ""
+    }
+  }
+}

@@ -1,0 +1,71 @@
+=====================================================================
+วิธีใช้ script ทดสอบความปลอดภัย IAAA — test-iaaa.sh
+(สำหรับอาจารย์ใช้รันตรวจผลการทดสอบ)
+=====================================================================
+
+1) ภาพรวม
+   script นี้ทดสอบระบบจัดการผู้ใช้งาน (Strapi + PostgreSQL) ตามหลัก
+   IAAA: Identification / Authentication / Authorization / Accountability
+   มีทั้งหมด 14 หัวข้อ แบ่งเป็น
+     - I (Identification) : ปิดสมัครผู้ใช้ / ปิดสมัครแอดมิน / unique_email
+     - A (Authentication) : login ถูก-ผิด / forgot-password / bcrypt / token ปลอม
+     - A (Authorization)  : user token ใช้ admin API ไม่ได้ / CORS บล็อก evil origin
+     - A (Accountability) : rate-limit (429) / audit.log มีร่องรอย / email reset ถูกส่ง
+
+2) ไฟล์ที่ต้องมี (อยู่ในโฟลเดอร์เดียวกับ script แล้ว มีให้แล้ว)
+   - secret.env        เก็บ ADMIN_PASSWORD / USER_PASSWORD / USER_EMAIL
+                       (ถูก gitignore ไว้ ไม่มีใน repo)
+   - .env              เก็บ POSTGRES_PASSWORD ฯลฯ ไว้ให้ script ตรวจ hash ใน DB
+   ถ้าหาย ให้สร้างใหม่ โดย `secret.env` ต้องมีบรรทัดอย่างน้อย:
+       USER_EMAIL=ido2@gmail.com
+       USER_PASSWORD=<รหัสผ่านจริงของ test user>
+       ADMIN_PASSWORD=<รหัสผ่านจริงของ admin>
+
+3) ต้องรัน Docker ก่อน (ทุกคอนเทนเนอร์สุขภาพดี)
+   docker compose up -d --build
+   ตรวจ: docker ps  ควรมองเห็น 4 ตัว = 69-s3-db / 69-s3-admin / 69-s3-app / 69-s3-mailhog
+   ทุกตัวขึ้นว่า (healthy) ก่อนรัน script
+
+4) วิธีรัน (หลายระบบ OS)
+
+   Windows + Git Bash:
+     - เปิด Git Bash ที่โฟลเดอร์โปรเจกต์
+     - รัน: bash test-iaaa.sh
+
+   Windows + CMD:
+     - CMD รันไฟล์ .sh ตรงๆ ไม่ได้ ต้องเรียกผ่าน bash
+     - ต้องลง Git (Git Bash) และให้มี bash.exe อยู่ใน PATH แล้ว
+     - เปิด CMD ที่โฟลเดอร์โปรเจกต์
+     - รัน: bash test-iaaa.sh
+
+   Linux:
+     chmod +x test-iaaa.sh
+     ./test-iaaa.sh
+
+   WSL (Ubuntu เป็นต้น):
+     - cd /mnt/c/Users/ADMIN/69-s3-cybersec
+     - chmod +x test-iaaa.sh
+     - ./test-iaaa.sh
+
+   หมายเหตุ: bash test-iaaa.sh ใช้ได้ทุกระบบ ไม่ต้อง chmod
+             (chmod +x จำเป็นเฉพาะวิธีรันแบบ ./test-iaaa.sh)
+
+5) ผลลัพธ์ที่คาดหวัง (ตอนนี้ได้จริง)
+   [PASS] ทั้ง 14 หัวข้อ (14/14)
+   คะแนนรวม = 100%
+
+6) ข้อควรระวัง
+   - หัวข้อ T9 (rate-limit) จะล็อก IP ประมาณ 1 นาทีหลังรัน
+     → รันครั้งเดียวแล้วดูผล หรือถ้าจะรันซ้ำ ควรรอ >1 นาที และ
+       ตรวจสอบว่า 429 ยังปรากฏในผลครั้งก่อนอยู่
+   - การรันซ้ำแล้วได้ FAIL บางหัวข้อ มักเกิดจาก IP ยังถูกล็อก
+     หรือรันก่อน app พร้อม (ควรรอ app เป็น healthy ก่อน)
+   - หัวข้อ T13 ตรวจ logs/audit.log ต้องมีประวัติ register + 429
+     ถ้าโดนล้าง log ใหม่ ต้องรันให้ระบบสร้างเหตุการณ์ก่อน (เช่น login ผิดซ้ำ)
+
+7) หลักฐานอื่นที่เช็คได้ (สำหรับประกอบการตรวจ)
+   - Mailhog UI : http://127.0.0.1:8025  (ดูอีเมล reset password)
+   - pgAdmin    : http://127.0.0.1:8000  (ดูข้อมูล DB)
+   - App        : http://127.0.0.1:8037  (หน้าเว็บ/API)
+   - logs/audit.log : log เหตุการณ์ความปลอดภัยของระบบ
+=====================================================================
