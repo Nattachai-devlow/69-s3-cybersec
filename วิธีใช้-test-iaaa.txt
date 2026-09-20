@@ -26,11 +26,29 @@
    ตรวจ: docker ps  ควรมองเห็น 4 ตัว = 69-s3-db / 69-s3-admin / 69-s3-app / 69-s3-mailhog
    ทุกตัวขึ้นว่า (healthy) ก่อนรัน script
 
-4) วิธีรัน
-   chmod +x test-iaaa.sh
-   ./test-iaaa.sh
+4) วิธีรัน (หลายระบบ OS)
 
-   (ใน Windows ให้รันผ่าน WSL หรือ Git Bash)
+   Windows + Git Bash:
+     - เปิด Git Bash ที่โฟลเดอร์โปรเจกต์
+     - รัน: bash test-iaaa.sh
+
+   Windows + CMD:
+     - CMD รันไฟล์ .sh ตรงๆ ไม่ได้ ต้องเรียกผ่าน bash
+     - ต้องลง Git (Git Bash) และให้มี bash.exe อยู่ใน PATH แล้ว
+     - เปิด CMD ที่โฟลเดอร์โปรเจกต์
+     - รัน: bash test-iaaa.sh
+
+   Linux:
+     chmod +x test-iaaa.sh
+     ./test-iaaa.sh
+
+   WSL (Ubuntu เป็นต้น):
+     - cd /mnt/c/Users/ADMIN/69-s3-cybersec
+     - chmod +x test-iaaa.sh
+     - ./test-iaaa.sh
+
+   หมายเหตุ: bash test-iaaa.sh ใช้ได้ทุกระบบ ไม่ต้อง chmod
+             (chmod +x จำเป็นเฉพาะวิธีรันแบบ ./test-iaaa.sh)
 
 5) ผลลัพธ์ที่คาดหวัง (ตอนนี้ได้จริง)
    [PASS] ทั้ง 14 หัวข้อ (14/14)
