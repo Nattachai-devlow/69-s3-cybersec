@@ -1,0 +1,15 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "NAME_OF_SERVER",
+      "Group": "",
+      "Host": "",
+      "Port": <PORT>,
+      "Username": "USERNAME_OF_SERVER",
+      "Password": "PASSWORD_OF_SERVER",
+      "SSLMode": "prefer",
+      "SavePassword": true,
+      "MaintenanceDB": "YOU_MAINTENANCE_DB"
+    }
+  }
+}
