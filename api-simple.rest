@@ -83,6 +83,7 @@ Content-Type: application/json
   "passwordConfirmation" : " "
 }
 
+
 ### 2.4 GET api/users/me [get profile]
 GET http://127.0.0.1:8037/api/users/me
 Authorization: Bearer {{Token-JWT}}
