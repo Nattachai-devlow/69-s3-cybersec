@@ -1,0 +1,3 @@
+[submodule "image/nattachai-devlow"]
+	path = image/nattachai-devlow
+	url = https://github.com/Nattachai-devlow/strapi-v5-custom.git
